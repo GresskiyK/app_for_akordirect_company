@@ -21,7 +21,7 @@ class GridAdapter(private val list: List<ItemOfGrid>) : BaseAdapter() {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.grid_item, parent, false)
         val tv=view.findViewById<TextView>(R.id.textOfItem)
         val img=view.findViewById<ImageView>(R.id.imageOfItem)
-        tv.text = list[position].model
+        tv.text = list[position].model.toUpperCase()
         val url = URL(list[position].urlImg).toString()
         Log.i("qwer",url)
         Picasso.get().load(url).into(img)

@@ -13,10 +13,17 @@ import com.example.workapp.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.R.attr.fragment
+import android.R.attr.supportsLocalInteraction
+import androidx.fragment.app.FragmentManager
+import android.R.attr.fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
+import com.example.workapp.fragments.DetailFragment
+
 
 class LasersFragment : Fragment() {
 
-    private lateinit var textViewLasers: TextView
     private lateinit var gridLayout: GridView
     private lateinit var progressBar: android.widget.ProgressBar
     private var items = ArrayList<ItemOfGrid>()
@@ -29,9 +36,17 @@ class LasersFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_lasers, container, false)
         progressBar = view.findViewById(R.id.progressBar)
-        textViewLasers=view.findViewById(R.id.text_lasers)
         gridLayout=view.findViewById(R.id.gridLayout)
         progressBar.isVisible=true
+        gridLayout.setOnItemClickListener { parent, view, position, id ->
+
+            val transaction = activity!!.supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right,0)
+                .replace(R.id.nav_host_fragment,DetailFragment(items[position]))
+                .addToBackStack("tg")
+                .commit()
+        }
         getData()
         return view
     }
@@ -53,7 +68,7 @@ class LasersFragment : Fragment() {
             ) {
                 val serverResponse = response.body()
                 if (serverResponse!=null) {
-                    for (i in 0..5) {
+                    for (i in 0..6) {
                         items.add(
                             ItemOfGrid(
                                 serverResponse[i].model.toString(),
