@@ -17,6 +17,7 @@ import android.R.attr.fragment
 import android.R.attr.supportsLocalInteraction
 import androidx.fragment.app.FragmentManager
 import android.R.attr.fragment
+import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.workapp.fragments.DetailFragment
@@ -37,17 +38,34 @@ class LasersFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_lasers, container, false)
         progressBar = view.findViewById(R.id.progressBar)
         gridLayout=view.findViewById(R.id.gridLayout)
-        progressBar.isVisible=true
-        gridLayout.setOnItemClickListener { parent, view, position, id ->
-
-            val transaction = activity!!.supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_right,0)
-                .replace(R.id.nav_host_fragment,DetailFragment(items[position]))
-                .addToBackStack("tg")
-                .commit()
+        if (items.isNotEmpty()) {
+            items.clear()
+            getData()
+        } else {
+            getData()
         }
-        getData()
+        progressBar.isVisible=true
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        gridLayout.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(context,DetailActivity::class.java)
+            intent.putExtra("model", items[position].model)
+            intent.putExtra("tableSize", items[position].tableSize)
+            intent.putExtra("img", items[position].urlImg)
+            intent.putExtra("axis", items[position].axisCount)
+            intent.putExtra("location", items[position].location)
+            intent.putExtra("x", items[position].x)
+            intent.putExtra("y", items[position].y)
+            intent.putExtra("z", items[position].z)
+            startActivity(intent)
+
+//            val transaction = activity!!.supportFragmentManager
+//                .beginTransaction()
+//                .setCustomAnimations(R.anim.enter_from_right,0)
+//                //.replace(R.id.nav_host_fragment,DetailFragment(items[position]),"detailfragment")
+//                .addToBackStack(null)
+//                .replace(R.id.nav_host_fragment,DetailFragment(items[position]),"detailfragment")
+//                .commit()
+        }
         return view
     }
 
@@ -72,7 +90,13 @@ class LasersFragment : Fragment() {
                         items.add(
                             ItemOfGrid(
                                 serverResponse[i].model.toString(),
-                                serverResponse[i].picture.toString()
+                                serverResponse[i].picture.toString(),
+                                serverResponse[i].location.toString(),
+                                serverResponse[i].tableSize.toString(),
+                                serverResponse[i].axiscount .toString(),
+                                serverResponse[i].x .toString(),
+                                serverResponse[i].y .toString(),
+                                serverResponse[i].z .toString()
                             )
                         )
                     }

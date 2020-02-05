@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_machining">
+    app:startDestination="@+id/nav_lasers">
 
     <fragment
         android:id="@+id/nav_machining"
         android:name="com.example.workapp.fragments.machining_centers.MachiningCenterFragment"
-        android:label="CNC Machining centers"
+        android:label="Welcome"
         tools:layout="@layout/fragment_machining_center" />
 
     <fragment
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/nav_lasers"
         android:name="com.example.workapp.fragments.lasers.LasersFragment"
-        android:label="CNC Lasers"
+        android:label="CNC Milling machine"
         tools:layout="@layout/fragment_lasers" />
 
     <fragment

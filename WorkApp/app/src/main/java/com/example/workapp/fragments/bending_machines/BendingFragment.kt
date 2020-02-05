@@ -12,20 +12,13 @@ import com.example.workapp.R
 
 class BendingFragment : Fragment() {
 
-    private lateinit var bendingViewModel: BendingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bendingViewModel =
-            ViewModelProviders.of(this).get(BendingViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_bending, container, false)
-        val textView: TextView = root.findViewById(R.id.text_send)
-        bendingViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
         return root
     }
 }

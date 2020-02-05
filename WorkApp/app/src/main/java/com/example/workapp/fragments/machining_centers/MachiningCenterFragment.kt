@@ -12,20 +12,16 @@ import com.example.workapp.R
 
 class MachiningCenterFragment : Fragment() {
 
-    private lateinit var machiningCenterViewModel: MachiningCenterViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        machiningCenterViewModel =
-            ViewModelProviders.of(this).get(MachiningCenterViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_machining_center, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        machiningCenterViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+
+
         return root
     }
 }

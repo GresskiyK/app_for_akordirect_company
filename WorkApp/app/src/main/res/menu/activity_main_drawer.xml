@@ -6,22 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_machining"
-            android:title="CNC machining centers" />
-        <item
-            android:id="@+id/nav_lathes"
-            android:title="CNC lathes" />
-        <item
-            android:id="@+id/nav_punch"
-            android:title="CNC punch press" />
-        <item
-            android:id="@+id/nav_press"
-            android:title="CNC press brakes" />
+            android:title="WELCOME"/>
+
         <item
             android:id="@+id/nav_lasers"
-            android:title="CNC lasers" />
-        <item
-            android:id="@+id/nav_bending"
-            android:title="Bending machines" />
+            android:title="CNC Milling machines" />
     </group>
 
 </menu>
